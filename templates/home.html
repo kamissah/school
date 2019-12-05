@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block head_title %}Home | {{ block.super }}{% endblock head_title %}
+
+{% block content %}
+
+<div class="card" style="width: 18rem;">
+ <div class="card-header">
+ Featured
+ </div>
+ <ul class="list-group list-group-flush">
+ <li class="list-group-item"><a class="" href="{% url 'cumRec:studentList' %}">Student Records App</a></li>
+ <li class="list-group-item"><a class="" href="">Library App</a></li>
+ <li class="list-group-item">Info</li>
+ </ul>
+</div>
+
+{% endblock content %}

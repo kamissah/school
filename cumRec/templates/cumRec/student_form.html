@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block head_title %}Student Form | {{ block.super }}{% endblock head_title %}
+ 
+{% block content %}
+<div>
+{% include 'cumRec/sbase.html' %}
+
+	<div class="container">
+		<h3>Create a new Student</h3>
+		{% if error_message %}
+			<p><strong>{{ error_message }}</strong></p>
+		{% endif %}
+		<form class="" role="form" action="" method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			<table class="table table-bordered">
+	      		{{ form.as_table }}
+	    	</table>
+			<div>
+				<button type="submit">Submit</button>
+			</div>
+		</form>
+		<p><a href="{% url 'cumRec:studentList' %}">Back to student listing</a></p>
+	</div>
+	
+</div>
+{% endblock %}

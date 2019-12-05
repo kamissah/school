@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'cumRec/cumRecStyle.css' %}"/>
+    <script src="{% static 'cumRec/js/main.js' %}"></script>
+</head>
+
+<body>
+
+	<div id="nav">
+		<nav class="nav-style">
+			<div >
+				<ul>
+					<li class="nav-item dropdown">
+				        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+				          Dropdown
+				        </a>
+				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+				          <a class="dropdown-item" href="{% url 'cumRec:studentList' %}">Students</a>
+				          <a class="dropdown-item" href="{% url 'cumRec:studentCreate' %}">Add Student</a>
+				          <a class="dropdown-item" href="{% url 'cumRec:studentRecordsCreate' %}">Add Student Record</a>
+				          <a class="dropdown-item" href="{% url 'cumRec:register' %}">Register</a>
+				        </div>
+				    </li>
+				            
+				    <li>Currently logged in as: <strong>{{ user.username }}</strong></li>
+    				<li><a href="{% url 'cumRec:logoutUser' %}">Logout</a></li>
+<!--   				
+	    			<li>
+					  <form class="form-inline">
+					    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+					    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+					  </form>		
+	            	</li>
+-->
+				</ul>
+			</div>
+		</nav>
+	</div>
+
+{% block body %}
+{% endblock %}
+</body>
+
+</html>

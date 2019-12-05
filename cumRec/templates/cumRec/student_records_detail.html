@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+{% block head_title %}Student Records Detail | {{ block.super }}{% endblock head_title %}
+ 
+{% block content %}
+<div id="student-records-detail">
+{% include 'cumRec/sbase.html' %}
+
+	<div>
+	<h4>Student Info:</h4>
+		<div id="" class="">
+			<div id="" >
+				<a href="{{ value.get_absolute_url }}">
+					<img src="{{ student.photo.url }}" alt="student image" class="img-thumbnail rounded float-right img-fluid " >
+				</a>
+			</div>
+			<div>
+				<p>
+					<strong>Student ID:</strong> {{ student.studentID  }}<br>
+					<strong>Student Name:</strong> {{ student.firstName }} {{ student.lastName }}<br>
+					<strong>School:</strong> {{ student.school }}<br>
+					<strong>Course:</strong> {{ student.course }}<br>
+					<strong>Index Number:</strong> {{ student.indexNumber }}<br>
+					<strong>Admission Year:</strong> {{ student.admissionYear }}<br>
+					<strong>Completed:</strong> {{ student.completed }}
+					<strong>Completion Year:</strong> {{ student.completionYear }}
+				</p>
+			</div>
+		</div>
+	</div>
+		<h4>Cummulative Records:</h4>
+	<div class="">
+		<table class="table table-bordered">
+			<thead>
+				<tr>					
+<!--				
+					<th>Item</th>	
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>School</th>
+					<th>Course</th>
+-->
+					<th>Student ID</th>
+					<th>Subject</th>
+					<th>Form1 Term1</th>
+					<th>Form1 Term2</th>
+					<th>Form1 Term3</th>
+					<th>Form2 Term1</th>
+					<th>Form2 Term2</th>
+					<th>Form2 Term3</th>
+					<th>Form3 Term1</th>
+					<th>Form3 Term2</th>
+					<th>Form3 Term3</th>
+					<th>Capstone Exam</th>
+					<th>Total Score</th>
+					<th>Average Score</th>
+					<th>GPA</th>
+					<th>Grade</th>
+					<th>Time Posted</th>
+					<th>Time Updated</th>
+					<th>Edit</th>					
+				</tr>
+			</thead>
+			<tbody>
+				{% for value in studentrecords %}
+
+					<tr>						
+<!--					
+						<td>{{ value.pk }}</td>	
+						<td>{{ value.firstName }}</td>
+						<td>{{ value.lastName }}</td>
+						<td>{{ value.school }}</td>
+						<td>{{ value.course }}</td>
+-->
+						<td><a href="{% url 'cumRec:studentList' %}"> {{ value.student }}</a></td>
+						<td>{{ value.subject }}</td>
+						<td>{{ value.form1Term1 }}</td>
+						<td>{{ value.form1Term2 }}</td>
+						<td>{{ value.form1Term3 }}</td>
+						<td>{{ value.form2Term1 }}</td>
+						<td>{{ value.form2Term2 }}</td>
+						<td>{{ value.form2Term3 }}</td>
+						<td>{{ value.form3Term1 }}</td>	
+						<td>{{ value.form3Term2 }}</td>
+						<td>{{ value.form3Term3 }}</td>
+						<td>{{ value.capstoneExam }}</td>
+						<td>{{ value.totalScore }}</td>
+						<td>{{ value.averageScore }}</td>	
+						<td>{{ value.gpa }}</td>
+						<td>{{ value.gradeName }}</td>
+						<td>{{ value.timeSubmitted }}</td>
+						<td>{{ value.updatedTime | timesince}} ago</td>
+						<td><a href="{% url 'cumRec:studentRecordsUpdate' value.pk %}">Edit</a></td>
+					</tr>
+				
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	<div>
+		<p><a href="{% url 'cumRec:studentList' %}">Back to Student List {{ value.student }}</a></p>
+		<p><a href="{{ student.get_absolute_url }}">Print {{ student.studentID  }}</a></p>
+	</div>
+	
+	<div>
+    {% if nonRecordStudents %}
+        <h4 style="color: red">Add a record</h4>
+        <form class="form-control" action="{% url 'cumRec:studentRecordsCreate' student.id %}" name="non_record_students" method="post">
+            {% csrf_token %}
+            <select name="nonRecordStudents">
+                {% for student in nonRecordStudents %}
+                    <option value="{{ student.id }}">{{ student.id }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Add student records" />
+        </form>
+    {% else %}
+        <div>There is no student without records.</div>
+    {% endif %}
+    </div>
+    
+</div>
+{% endblock %}

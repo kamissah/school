@@ -1,0 +1,23 @@
+
+body {
+	background-color: #f0f0f0;
+}
+nav ul li {
+	display: inline-block;
+}
+
+nav li a {
+	text-decoration: none;
+}
+table {
+	width: 100%;
+	color: #000000;
+	border-collapse: collapse
+}
+table caption,tr,th,td {
+	border: 1px solid #3498db;
+	padding: 2px;
+}
+caption,thead th,tfoot th{
+	background-color: #e9f9ac;
+}

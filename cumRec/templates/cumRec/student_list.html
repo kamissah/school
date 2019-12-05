@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block head_title %}Students | {{ block.super }}{% endblock head_title %}
+
+{% block content %}
+<div id="student-list">
+{% include 'cumRec/sbase.html' %}
+
+	<h4>List of students:</h4>
+    <div class="">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th scope="col">Item</th>
+					<th scope="col">Student ID</th>
+					<th scope="col">First Name</th>
+					<th scope="col">Last Name</th>
+					<th scope="col">Gender</th>
+					<th scope="col">School</th>
+					<th scope="col">Course</th>
+					<th scope="col">Admission Year</th>
+					<th scope="col">Time Posted</th>
+					<th scope="col">Time Updated</th>
+					<th scope="col">Edit</th>
+					<th scope="col">Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				{% for student in students %}
+
+					<tr>
+						<td>{{ student.id }}</td>
+						<td><a href="{% url 'cumRec:studentRecordsDetail' student.id %}"> {{ student.studentID }}</a></td>
+						<td>{{ student.firstName }}</td>
+						<td>{{ student.lastName }}</td>
+						<td>{{ student.gender }}</td>
+						<td>{{ student.school }}</td>
+						<td>{{ student.course }}</td>
+						<td>{{ student.admissionYear }}</td>
+						<td>{{ student.timeSubmitted }}</td>
+						<td>{{ student.updatedTime | timesince }} ago</td>
+						<td><a href="{% url 'cumRec:studentUpdate' student.id %}">Edit</a></td>
+						<td><form action="{% url 'cumRec:studentDelete' student.id %}" method="post" style="display: inline;">
+	                        {% csrf_token %}
+	                        <input type="hidden" name="delete" value="{{ student.id }}" />
+	                            <button type="submit" class="">
+	                            <span class="">delete</span>
+	                            </button>
+	                        </form>
+	                    </td>							 					   	
+					</tr>
+			
+				{% endfor %}
+					<tr>
+
+						 <th scope="row">#</th>
+						 <td colspan="11">Total Students</td>
+
+ 					</tr>
+		
+			</tbody>
+		</table>
+	</div>
+
+
+
+</div>
+{% endblock content %}
